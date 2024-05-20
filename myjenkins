@@ -26,29 +26,8 @@ pipeline {
             }
     }
     
-    stage('Docker Image Creation') {
-      steps {
-        sh 'docker build -t ajit0211/insurance_CICD:latest .'
-            }
-    }
-    stage('DockerLogin') {
-      steps {
-        withCredentials([usernamePassword(credentialsId: 'Docker-Hub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-}
-            }
-    }
+} 
 
-    stage('Push Image to DockerHub') {
-      steps {
-        sh 'docker push 0211ajit/inURANCE_CICD:latest'
-            }
-    }
-    stage('Deploy Application using Ansible') {
-      steps {
-        ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'deploy.yml'
-            }
-    }
 
-  }
-}
+  
+
