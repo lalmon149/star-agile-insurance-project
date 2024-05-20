@@ -22,13 +22,13 @@ pipeline {
     
     stage('Publish Reports using HTML') {
       steps {
-      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/star-agile-Insure-Project/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/insurance_CICD/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
             }
     }
     
     stage('Docker Image Creation') {
       steps {
-        sh 'docker build -t ajit0211/insureproject:latest .'
+        sh 'docker build -t ajit0211/insurance_CICD:latest .'
             }
     }
     stage('DockerLogin') {
@@ -41,7 +41,7 @@ pipeline {
 
     stage('Push Image to DockerHub') {
       steps {
-        sh 'docker push 0211ajit/insureproject:latest'
+        sh 'docker push 0211ajit/inURANCE_CICD:latest'
             }
     }
     stage('Deploy Application using Ansible') {
